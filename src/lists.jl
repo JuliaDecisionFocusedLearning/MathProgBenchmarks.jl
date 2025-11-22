@@ -1,0 +1,34 @@
+"""
+    list_instances(dataset::Dataset)
+
+Return the names of all available instances in a given `dataset`.
+
+# See also
+
+- [`Dataset`](@ref)
+"""
+function list_instances(dataset::Dataset)
+    if dataset == MIPLIB2017 || dataset == MIPLIB2017Benchmark
+        return list_miplib2017_instances(dataset)
+    elseif dataset == Netlib
+        return list_netlib_instances()
+    end
+end
+
+function list_miplib2017_instances(dataset::Dataset)
+    list_path = if dataset == MIPLIB2017Benchmark
+        joinpath(datadep"miplib2017-benchmark-list", "benchmark-v2.test")
+    else
+        joinpath(datadep"miplib2017-collection-list", "collection-v1.test")
+    end
+    lines = open(list_path, "r") do file
+        readlines(file)
+    end
+    return map(n -> string(chopsuffix(n, ".mps.gz")), lines)
+end
+
+function list_netlib_instances()
+    netlib_path = fetch_netlib()
+    valid_instances = filter(n -> endswith(n, ".SIF"), readdir(netlib_path))
+    return map(n -> lowercase(chopsuffix(n, ".SIF")), valid_instances)
+end
