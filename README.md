@@ -10,8 +10,8 @@ Supported datasets:
 
 ## Getting started
 
-1. To see which instances are available, call `list_instances(dataset, name)`.
-2. To read a specific instance, call `read_instance(dataset, name)`.
+1. To see which instances are available, call `list_instances(dataset)` with `dataset in (Netlib, MIPLIB2017, MittelmannLP)`.
+2. To read a specific instance, call `read_instance(dataset, name)` where `name isa String`.
 3. The returned problem format is `QPSData` from [QPSReader.jl](https://github.com/JuliaSmoothOptimizers/QPSReader.jl).
 
 More details are available in the docstrings.
