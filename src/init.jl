@@ -1,11 +1,16 @@
+MPS_SCRATCH = ""
+
 function __init__()
+    global MPS_SCRATCH = @get_scratch!("mps_scratch")
     # MIPLIB 2017
     register(
         DataDep(
             "miplib2017-collection",
             """
-            All instances in the MIPLIB 2017 collection set (size: 3.5 GB).
-            Source: https://miplib.zib.de/index.html.""",
+            All instances in the MIPLIB 2017 collection set.
+            Source: https://miplib.zib.de/index.html.
+            Compressed download size: 3.5 GB
+            Decompressed size: ?? GB""",
             "https://miplib.zib.de/downloads/collection.zip",
             post_fetch_method = unpack,
         ),
@@ -14,11 +19,13 @@ function __init__()
         DataDep(
             "miplib2017-benchmark",
             """
-            All instances in the MIPLIB 2017 benchmark set (size: 317 MB).
-            Source: https://miplib.zib.de/index.html.""",
+            All instances in the MIPLIB 2017 benchmark set.
+            Source: https://miplib.zib.de/index.html.
+            Compressed download size: 317 MB
+            Decompressed size: 639 MB""",
             "https://miplib.zib.de/downloads/benchmark.zip",
+            "c756eefd544d83b31809306b45d3549a1a5b9378e6aa78b68738b1a3b6a418fa",
             post_fetch_method = unpack,
-            "c756eefd544d83b31809306b45d3549a1a5b9378e6aa78b68738b1a3b6a418fa"
         ),
     )
     register(
@@ -42,26 +49,19 @@ function __init__()
         ),
     )
     # Mittelmann
-    for (folder, names) in pairs(MITTELMANN_LP_INSTANCES)
-        for name in names
-            @info "$folder / $name"
-            datadep_name = "mittelmann-lp-$name"
-            # TODO: some paths are just .bz2, following no visible pattern
-            if isnothing(folder)
-                datadep_msg = """
-                Instance $name from the Mittelmann LP benchmark set.
-                Source: https://plato.asu.edu/ftp/lptestset/."""
-                datadep_url = "https://plato.asu.edu/ftp/lptestset/$name.mps.bz2"
-            else
-                datadep_msg = """
-                Instance $name from the Mittelmann LP benchmark set (folder $folder).
-                Source: https://plato.asu.edu/ftp/lptestset/."""
-                datadep_url = "https://plato.asu.edu/ftp/lptestset/$folder/$name.mps.bz2"
-            end
-            register(
-                DataDep(datadep_name, datadep_msg, datadep_url)
-            )
-        end
-    end
+    register(
+        DataDep(
+            "mittelmann-lp",
+            """
+            All instances in the Mittelmann LP benchmark set.
+            Source: https://plato.asu.edu/ftp/lptestset/.
+            Compressed download size: ??
+            Decompressed size: 2.21 GB""",
+            map(
+                path -> "https://plato.asu.edu/ftp/lptestset/$path.bz2",
+                MITTELMANN_LP_INSTANCES
+            ),
+        )
+    )
     return nothing
 end

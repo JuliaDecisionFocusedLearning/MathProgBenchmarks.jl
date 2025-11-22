@@ -36,5 +36,6 @@ function list_netlib_instances()
 end
 
 function list_mittelmann_lp_instances()
-    return reduce(vcat, values(MITTELMANN_LP_INSTANCES))
+    all_names = reduce(vcat, MITTELMANN_LP_INSTANCES)
+    return map(n -> string(chopsuffix(split(n, "/")[end], ".mps")), all_names)
 end

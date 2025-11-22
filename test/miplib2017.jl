@@ -1,4 +1,5 @@
 using MathProgBenchmarks
+using QPSReader
 using Test
 
 miplib_list = list_instances(MIPLIB2017)
@@ -8,5 +9,5 @@ miplib_benchmark_list = MathProgBenchmarks.list_miplib2017_instances(; benchmark
 @test length(miplib_benchmark_list) == 240
 
 for name in miplib_benchmark_list[1:10]
-    @test_nowarn qps_data = read_instance(MIPLIB2017, name)
+    @test read_instance(MIPLIB2017, name) isa Tuple{QPSData, String}
 end

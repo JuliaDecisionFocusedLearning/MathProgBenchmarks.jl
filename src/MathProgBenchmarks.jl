@@ -5,6 +5,7 @@ using DataDeps
 import GZip
 using Logging
 using QPSReader
+using Scratch
 
 include("datasets.jl")
 include("instances.jl")
