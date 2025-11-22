@@ -5,28 +5,20 @@ Enum type for mathematical programming datasets.
 
 Possible values:
 
-- [`MIPLIB2017`](@ref), [`MIPLIB2017Benchmark`](@ref)
+- [`MIPLIB2017`](@ref)
 - [`Netlib`](@ref)
+- [`MittelmannLP`](@ref)
 """
-@enum Dataset MIPLIB2017 MIPLIB2017Benchmark Netlib
+@enum Dataset MIPLIB2017 Netlib MittelmannLP
 
 """
     MIPLIB2017
 
 Mixed Integer Linear Programs from the MIPLIB2017 collection dataset.
 
-Source: <https://miplib.zib.de/>.
+Source: <https://miplib.zib.de/tag_collection.html>.
 """
 MIPLIB2017
-
-"""
-    MIPLIB2017Benchmark
-
-Mixed Integer Linear Programs from the MIPLIB2017 benchmark dataset (much smaller than the collection dataset).
-
-Source: <https://miplib.zib.de/>.
-"""
-MIPLIB2017Benchmark
 
 """
     Netlib
@@ -36,3 +28,12 @@ Linear Programs from the Netlib dataset.
 Source: <https://www.netlib.org/lp/data/index.html>.
 """
 Netlib
+
+"""
+    MittelmannLP
+
+Linear Programs from the Mittelmann benchmark dataset.
+
+Source: <https://plato.asu.edu/ftp/lptestset/>.
+"""
+MittelmannLP

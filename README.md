@@ -8,7 +8,7 @@ Supported datasets:
 
 - [x] [Netlib](https://www.netlib.org/lp/data/index.html)
 - [x] [MIPLIB 2017](https://miplib.zib.de/index.html)
-- [ ] [Mittelman benchmark](https://plato.asu.edu/ftp/lptestset/)
+- [ ] [Mittelmann benchmark](https://plato.asu.edu/ftp/lptestset/)
 
 The source files are downloaded automatically thanks to [DataDeps.jl](https://github.com/oxinabox/DataDeps.jl).
 The returned problem format is `QPSData` from [QPSReader.jl](https://github.com/JuliaSmoothOptimizers/QPSReader.jl).

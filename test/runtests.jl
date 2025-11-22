@@ -11,7 +11,10 @@ ENV["DATADEPS_ALWAYS_ACCEPT"] = true
     @testset "Netlib" begin
         include("netlib.jl")
     end
-    @testset "MIPLIB2017" begin
+    @testset "MIPLIB 2017" begin
         include("miplib2017.jl")
+    end
+    @testset "Mittelmann" begin
+        include("mittelmann.jl")
     end
 end

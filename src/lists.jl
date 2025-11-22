@@ -8,15 +8,17 @@ Return the names of all available instances in a given `dataset`.
 - [`Dataset`](@ref)
 """
 function list_instances(dataset::Dataset)
-    if dataset == MIPLIB2017 || dataset == MIPLIB2017Benchmark
-        return list_miplib2017_instances(dataset)
+    if dataset == MIPLIB2017
+        return list_miplib2017_instances()
     elseif dataset == Netlib
         return list_netlib_instances()
+    elseif dataset == MittelmannLP
+        return list_mittelmann_lp_instances()
     end
 end
 
-function list_miplib2017_instances(dataset::Dataset)
-    list_path = if dataset == MIPLIB2017Benchmark
+function list_miplib2017_instances(; benchmark_only::Bool = false)
+    list_path = if benchmark_only
         joinpath(datadep"miplib2017-benchmark-list", "benchmark-v2.test")
     else
         joinpath(datadep"miplib2017-collection-list", "collection-v1.test")
@@ -31,4 +33,8 @@ function list_netlib_instances()
     netlib_path = fetch_netlib()
     valid_instances = filter(n -> endswith(n, ".SIF"), readdir(netlib_path))
     return map(n -> lowercase(chopsuffix(n, ".SIF")), valid_instances)
+end
+
+function list_mittelmann_lp_instances()
+    return reduce(vcat, values(MITTELMANN_LP_INSTANCES))
 end
