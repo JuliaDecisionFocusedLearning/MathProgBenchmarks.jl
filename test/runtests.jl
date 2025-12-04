@@ -1,12 +1,12 @@
 using Aqua
-using MathProgBenchmarks
+using MathOptBenchmarkInstances
 using Test
 
 ENV["DATADEPS_ALWAYS_ACCEPT"] = true
 
-@testset verbose = true "MathProgBenchmarks" begin
+@testset verbose = true "MathOptBenchmarkInstances" begin
     @testset "Code quality" begin
-        Aqua.test_all(MathProgBenchmarks; undocumented_names = true)
+        Aqua.test_all(MathOptBenchmarkInstances; undocumented_names = true)
     end
     @testset "Netlib" begin
         include("netlib.jl")

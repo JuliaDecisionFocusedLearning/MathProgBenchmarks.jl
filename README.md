@@ -1,27 +1,50 @@
-# MathProgBenchmarks.jl
+# MathOptBenchmarkInstances.jl
 
 A Julia package for automatic download and parsing of linear, quadratic and integer programming instances.
 
-Supported datasets:
+## Datasets
+
+Please read and abide by the license of the dataset you plan to use.
+
+### LP
 
 - [x] [Netlib](https://www.netlib.org/lp/data/index.html)
-- [x] [MIPLIB 2017](https://miplib.zib.de/index.html)
 - [x] [Mittelmann LP benchmark](https://plato.asu.edu/ftp/lptestset/)
+
+### MILP
+
+- [x] [MIPLIB 2017](https://miplib.zib.de/index.html)
+
+### QP
+
+- [ ] [QPLIB](https://qplib.zib.de/)
+- [ ] [Maros-Meszaros](https://www.doc.ic.ac.uk/~im/#DATA)
 
 ## Getting started
 
-1. To see which instances are available, call `list_instances(dataset)` with `dataset in (Netlib, MIPLIB2017, MittelmannLP)`.
-2. To read a specific instance, call `read_instance(dataset, name)` where `name isa String`.
-3. The returned problem format is `QPSData` from [QPSReader.jl](https://github.com/JuliaSmoothOptimizers/QPSReader.jl).
+1. To list the datasets available, call `values(Dataset)`.
+2. To list the instances from a `dataset`, call `list_instances(dataset)`.
+3. To read a specific instance given its `name`, call `read_instance(dataset, name)`. The return value is a tuple `(problem, path)` where `problem isa QPSData` from [QPSReader.jl](https://github.com/JuliaSmoothOptimizers/QPSReader.jl) and `path` points to the decompressed source file on your computer.
 
-More details are available in the docstrings.
+See the docstrings for details.
 
 ## Tips
 
 The problem source files are downloaded automatically thanks to [DataDeps.jl](https://github.com/oxinabox/DataDeps.jl).
 Note that each download has to be validated manually from the REPL.
-This doesn't work well when the triggering line of code is executed with VSCode's Julia extension, better run it in the REPL directly.
+This doesn't work well when the triggering line of code is executed with VSCode's Julia extension, you better run it in the REPL directly.
 An alternative is to set `ENV["DATADEPS_ALWAYS_ACCEPT"] = true`.
 
 The decompressed instances can be rather large (over 80 GB for the complete MIPLIB 2017 collection).
-If you need to clean up some space, you can delete unneeded files inside the folder located at `MathProgBenchmarks.MPS_SCRATCH`.
+If you need to clean up some space, you can delete unneeded files inside the folder located at `MathOptBenchmarkInstances.MPS_SCRATCH`.
+
+## Contributing
+
+To contribute a new dataset:
+
+1. Add its name to the `Dataset` enum.
+2. Register a new `DataDep` inside the `__init__()` function of the package.
+3. Implement a reader based on the files downloaded by the `DataDep`. This part might need decompression or file conversion steps, for which you can use the `MPS_SCRATCH` folder.
+4. Write documentation and tests.
+
+You can (and should) draw inspiration from the implementation of existing datasets.
