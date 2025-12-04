@@ -1,4 +1,4 @@
-module MathProgBenchmarks
+module MathOptBenchmarkInstances
 
 import CodecBzip2
 using DataDeps
@@ -17,4 +17,4 @@ export Dataset, MIPLIB2017, Netlib, MittelmannLP
 export read_instance
 export list_instances
 
-end # module MathProgBenchmarks
+end # module MathOptBenchmarkInstances
