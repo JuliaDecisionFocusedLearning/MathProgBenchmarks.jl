@@ -1,4 +1,4 @@
-using MathProgBenchmarks
+using MathOptBenchmarkInstances
 using QPSReader
 using Test
 
